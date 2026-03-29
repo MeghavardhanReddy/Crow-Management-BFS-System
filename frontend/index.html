@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Crowd Management System</title>
+    <!-- Load TensorFlow.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <!-- Load COCO-SSD -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="dashboard">
+        <header class="glass-panel">
+            <div class="header-content">
+                <div class="title-container">
+                    <div class="pulse-icon"></div>
+                    <h1>Real-Time Crowd Management <span class="badge">LIVE</span></h1>
+                </div>
+                <p>Powered by Edge AI & Network Analytics</p>
+            </div>
+            <div class="system-status">
+                <span class="status-label">Backend API:</span>
+                <span id="api-status" class="status-indicator">Connecting...</span>
+            </div>
+        </header>
+
+        <main class="grid-container">
+            <!-- Left Panel: Edge AI Camera -->
+            <section class="panel glass-panel camera-panel">
+                <div class="panel-header">
+                    <h2>Live Camera Feed</h2>
+                    <div class="controls-row">
+                        <select id="camera-select" class="premium-select">
+                            <option value="">Loading cameras...</option>
+                        </select>
+                        <select id="zone-select" class="premium-select">
+                            <option value="1">Zone 1: Main Entrance</option>
+                            <option value="2">Zone 2: Lobby</option>
+                            <option value="3">Zone 3: Hall A</option>
+                            <option value="4">Zone 4: Hall B</option>
+                            <option value="5">Zone 5: Corridor</option>
+                            <option value="6">Zone 6: Exit</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="video-container">
+                    <video id="webcam" autoplay playsinline muted width="640" height="480"></video>
+                    <canvas id="overlay" width="640" height="480"></canvas>
+                    <div id="loading" class="loading-overlay">
+                        <div class="spinner"></div>
+                        <p>Loading AI Model (COCO-SSD)...</p>
+                    </div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <span class="label">Detected Crowd</span>
+                        <span id="crowd-count" class="value highlight">0</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="label">AI Status</span>
+                        <span id="ai-status" class="value status-text">Initializing</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Right Panel: Network Topology -->
+            <section class="panel glass-panel graph-panel">
+                <div class="panel-header">
+                    <h2>Facility Network Overview</h2>
+                    <span class="subtitle">Routing & Density Tracking</span>
+                </div>
+
+                <div class="canvas-wrapper">
+                    <canvas id="network-canvas" width="800" height="600"></canvas>
+                </div>
+
+                <div class="legend">
+                    <div class="legend-item"><span class="dot safe"></span> Safe (0-40)</div>
+                    <div class="legend-item"><span class="dot warning"></span> Warning (41-50)</div>
+                    <div class="legend-item"><span class="dot critical"></span> Critical (>50)</div>
+                    <div class="legend-item"><span class="line path"></span> Active Safe Path</div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="glass-panel alerts-panel">
+            <div class="panel-header">
+                <h3>System Alerts</h3>
+            </div>
+            <ul id="alerts-list">
+                <li class="no-alerts">Initializing system...</li>
+            </ul>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
