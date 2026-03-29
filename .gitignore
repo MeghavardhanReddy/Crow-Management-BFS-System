@@ -4,9 +4,16 @@
 # Log file
 *.log
 
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
 # Package Files #
 *.jar
 *.war
+*.nar
 *.ear
 *.zip
 *.tar.gz
@@ -17,3 +24,7 @@ node_modules/
 dist/
 build/
 .env
+
+# virtual machine crash logs
+hs_err_pid*
+replay_pid*

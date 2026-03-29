@@ -83,6 +83,7 @@ public class CrowdManagementBFSSystem {
 
     private static void simulateCloudAnalytics() {
         scheduler.scheduleAtFixedRate(() -> {
+<<<<<<< HEAD
             alerts.clear();
             double totalDensity = zones.values().stream()
                 .mapToDouble(z -> z.crowd / 100.0)
@@ -100,6 +101,19 @@ public class CrowdManagementBFSSystem {
                 }
             }
         }, 0, 5, TimeUnit.SECONDS);
+=======
+            System.out.println("Cloud: Processing unified crowd view...");
+            double totalDensity = zones.values().stream()
+                .mapToDouble(z -> z.crowd / 100.0)
+                .sum() / zones.size();
+
+            if (totalDensity > 0.8) {
+                String alert = "High overall crowd density: " + String.format("%.2f", totalDensity);
+                alerts.add(alert);
+                System.out.println(alert);
+            }
+        }, 0, 10, TimeUnit.SECONDS);
+>>>>>>> 30f0f153a5ac773e9c94923ce533db5a066ff776
     }
 
     private static List<List<Integer>> findAllSafePaths(int start, int end) {
@@ -251,4 +265,5 @@ public class CrowdManagementBFSSystem {
         exchange.getResponseHeaders().add("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
         exchange.getResponseHeaders().add("Access-Control-Allow-Headers", "Content-Type,Authorization");
     }
+}
 }
